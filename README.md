@@ -1,26 +1,25 @@
 # PerceptionChallange
 
-![Answer Image](answer.png)
+![Boundary Detection](answer.png)
 
 ## Methodology
 
-The goal was to detect the boundaries of a straight path defined by red cones in an image. The following methodology was employed:
+To detect the boundaries defined by the cones in the image, the following steps were taken:
 
-1. **Color Filtering:** The image was filtered to only include regions with a strong red color component, which is characteristic of the cones.
-2. **Thresholding:** The filtered image was converted to grayscale and subsequently to binary using Otsu's thresholding.
-3. **Contour Detection:** Contours were detected in the binary image. Small contours, likely arising from noise, were filtered out.
-4. **Centroid Calculation:** The centroids of the identified contours were computed.
-5. **Line Fitting:** Based on the centroids of the left and right cones, lines were fit to represent the path boundaries.
-6. **Line Drawing:** The computed lines were drawn on the original image to visualize the path boundaries.
+1. **Color Filtering**: The image was filtered to retain only the red regions, which correspond to the cones.
+2. **Grayscale and Thresholding**: The filtered image was converted to grayscale and then binarized using Otsu's thresholding.
+3. **Contour Detection**: Contours in the thresholded image were identified.
+4. **Contour Filtering**: Contours were filtered based on their area, aspect ratio, and position to remove unwanted detections and retain only the cones. Specifically, a contour in the top right of the image, which was not a cone, was filtered out to improve the accuracy of the boundary detection.
+5. **Centroid Calculation**: The centroids of the filtered contours were computed. These centroids were used to dynamically identify the left and right cones, replacing the initial hard-coded approach.
+6. **Boundary Line Fitting**: Using the centroids, two lines were fitted to represent the left and right boundaries of the path defined by the cones. The lines were adjusted based on feedback to ensure a closer fit to the cones.
 
-## What Was Tried and Why It Didn't Work Initially
+## What Did We Try
 
-1. **Simple Color Filtering:** Initial attempts at color filtering did not isolate the red cones effectively. Adjustments in the color ranges were necessary to accurately target the red cones.
-2. **Vertical Lines Based on Centroids:** Initially, straight vertical lines were drawn based on the centroids of the leftmost and rightmost detected red cones. This approach did not account for the general direction of the cones, leading to misalignment.
-3. **Line Fitting:** An attempt to fit lines to the centroids of the detected cones was made. However, the initial fitting method did not yield accurate results, and adjustments were required.
+Initially, a direct approach of color filtering and contour detection was applied. However, some unwanted contours were also detected. To address this, additional contour filtering based on area, aspect ratio, and position was introduced. Hard-coded indices used in the first version were replaced with a dynamic approach based on the centroid positions of the detected cones.
 
 ## Libraries Used
 
-- OpenCV (cv2): For image processing tasks such as color filtering, contour detection, and line fitting.
-- NumPy: For numerical operations.
-- Matplotlib: For visualizing the results.
+- OpenCV (cv2): For image processing tasks like color filtering, contour detection, and line fitting.
+- NumPy: For numerical operations and array manipulations.
+- Matplotlib: For visualization purposes.
+
