@@ -13,9 +13,9 @@ To detect the boundaries defined by the cones in the image, the following steps 
 5. **Centroid Calculation**: The centroids of the filtered contours were computed. These centroids were used to dynamically identify the left and right cones, replacing the initial hard-coded approach.
 6. **Boundary Line Fitting**: Using the centroids, two lines were fitted to represent the left and right boundaries of the path defined by the cones. The lines were adjusted based on feedback to ensure a closer fit to the cones.
 
-## What Did We Try
+## What was Tried
 
-Initially, a direct approach of color filtering and contour detection was applied. However, some unwanted contours were also detected. To address this, additional contour filtering based on area, aspect ratio, and position was introduced. Hard-coded indices used in the first version were replaced with a dynamic approach based on the centroid positions of the detected cones.
+Initially, a direct approach of color filtering and contour detection was applied. However, some unwanted contours were also detected. To address this, additional contour filtering based on area, aspect ratio, and position was introduced. Hard-coded indices used in the first version to get a correct answer output. In order to build a more robust algorithm, inital versions were replaced with a dynamic approach based on the centroid positions of the detected cones.
 
 ## Libraries Used
 
